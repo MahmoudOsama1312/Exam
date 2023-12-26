@@ -1,0 +1,117 @@
+<div class="new-exam">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step label="اسم المادة" [completed]="subjNameCompletion">
+      <!--Completed here : from the mat-step if completed or not (True-False)-->
+      <div class="AddSubject d-flex flex-column justify-content-center">
+        <div>اسم المادة : </div>
+        <mat-form-field appearance="fill" color="warn">
+          <mat-label>اسم المادة</mat-label>
+          <input matInput type="text" [formControl]="name">
+        </mat-form-field>
+        <div>عدد الاسئله : </div>
+        <mat-form-field appearance="fill" color="warn">
+          <mat-label>عدد الاسئله</mat-label>
+          <input matInput type="text" [formControl]="numOfQuestions">
+        </mat-form-field>
+        <button color="warn" class="startButton" mat-raised-button matStepperNext
+          (click)="subjectNameSubmit()">{{subjNameCompletion?"القسم التالي":"ابدا"}}</button>
+      </div>
+    </mat-step>
+
+    <mat-step label="اسئله {{subjName}}" [completed]="questionsCompletion">
+      <div class="question">
+        <form [formGroup]="form">
+          <mat-form-field *ngIf="!(questions.length >= questNums)" appearance="outline" color="warn" class="queiz">
+            <mat-label>السؤال</mat-label>
+            <input matInput type="text" formControlName="question">
+          </mat-form-field>
+
+          <div class="row" *ngIf="!(questions.length >= questNums)">
+            <div class="col-md-6 col-sm-12">
+              <mat-radio-button value="answer1" color="warn" (change)="getRadioValue($event)"></mat-radio-button>
+              <mat-form-field color="warn">
+                <mat-label>أجابة A</mat-label>
+                <input matInput type="text" formControlName="answer1">
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+              <mat-radio-button value="answer2" color="warn" (change)="getRadioValue($event)"></mat-radio-button>
+              <mat-form-field color="warn">
+                <mat-label>أجابة B</mat-label>
+                <input matInput type="text" formControlName="answer2">
+              </mat-form-field>
+
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+              <mat-radio-button value="answer3" color="warn" (change)="getRadioValue($event)"></mat-radio-button>
+              <mat-form-field color="warn">
+                <mat-label>أجابة C</mat-label>
+                <input matInput type="text" formControlName="answer3">
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+              <mat-radio-button value="answer4" color="warn" (change)="getRadioValue($event)"></mat-radio-button>
+              <mat-form-field color="warn">
+                <mat-label>أجابة D</mat-label>
+                <input matInput type="text" formControlName="answer4">
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf="questions.length >= questNums" class="done"> تم الانتهاء من وضع <span class="questNum">
+              {{questNums}} </span>اسئله بنجاح </div>
+          <div class="questBtn">
+            <div>
+              <button *ngIf="questions.length >= questNums" mat-raised-button class="btn btn-success" matStepperNext
+                (click)="done()">{{questionsCompletion?"عرض":"انتهاء"}}</button>
+              <button *ngIf="questions.length >= questNums" mat-raised-button color="warn" matStepperPrevious
+                (click)="cancel()">الغاء</button>
+            </div>
+            <div>
+              <button *ngIf="!(questions.length >= questNums)" mat-raised-button color="accent"
+                (click)="clearForm()">اعاده كتابه </button>
+              <button *ngIf="!(questions.length >= questNums)" mat-raised-button color="primary" (click)="onSubmit()"
+                [disabled]="form.invalid">حفظ</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </mat-step>
+    <mat-step label="عرض الاختبار" completed="false">
+      <div class="examBox">
+        <div class="examhead text-center">
+          <h2>اختبار {{subjName}}</h2>
+        </div>
+        <div class="quizBox" *ngFor="let item of questions ; let index= index ">
+          <strong><span class="text-danger">سؤال {{index+1}}</span></strong>
+          <div class="mt-2"><strong>{{item.question}}</strong></div>
+          <div class="row" dir="rtl">
+            <div class="col-sm-12">
+              A. {{item.answer1}}
+            </div>
+            <div class="col-sm-12">
+              B. {{item.answer2}}
+            </div>
+            <div class="col-sm-12">
+              C. {{item.answer3}}
+            </div>
+            <div class="col-sm-12">
+              D. {{item.answer4}}
+            </div>
+            <div class="col-sm-12">
+              <span class="text-success">الاجابة الصحيحة. {{item.correctAnswer}}</span>
+            </div>
+          </div>
+          <div class="text-right">
+
+            <button mat-raised-button class="btn btn-danger" (click)="deleteQuestion(index)">حذف</button>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

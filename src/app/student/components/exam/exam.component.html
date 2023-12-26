@@ -1,0 +1,38 @@
+<div class="examBox">
+    <div class="examhead text-center"><h2>اختبار  {{selectedSubject?.name}}</h2></div>
+    <div class="quizBox" *ngFor="let quest of selectedSubject?.questions ; let index=index" >
+      <div>
+        <strong ><span class="text-danger">سؤال {{index+1}}</span> .  {{quest.question}}</strong>
+        <div class="row mt-3">
+            <div class="col-md-6 col-sm-12" >
+                <mat-radio-button *ngIf="info?.type=='student' && !showResult && !examValidation" (change)="studentAnswer($event)" name= {{index}} value="{{quest.answer1}}" color="warn"></mat-radio-button>
+                <label><strong>A.</strong>{{quest?.answer1}}</label>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <mat-radio-button *ngIf="info?.type=='student' && !showResult && !examValidation" (change)="studentAnswer($event)" name= {{index}} value="{{quest.answer2}}"  color="warn"></mat-radio-button>
+                <label><strong>B.</strong>{{quest?.answer2}}</label>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <mat-radio-button *ngIf="info?.type=='student' && !showResult && !examValidation " (change)="studentAnswer($event)" name= {{index}} value="{{quest.answer3}}"  color="warn"></mat-radio-button>
+                <label><strong>C.</strong>{{quest?.answer3}}</label>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <mat-radio-button  *ngIf="info?.type=='student' && !showResult && !examValidation"  (change)="studentAnswer($event)" name= {{index}} value="{{quest.answer4}}" color="warn"></mat-radio-button>
+                <label><strong>D.</strong>{{quest?.answer4}}</label>
+            </div>
+        </div>
+            <div class="text-start" *ngIf="info?.type=='doctor'">
+              <button mat-raised-button class="btn btn-danger" (click)="deleteQuestion(index)">حذف</button>
+            </div>
+        <hr>
+      </div>
+    </div>
+    <div class="text-center" *ngIf="info?.type=='student'">
+        <button *ngIf="!showResult && !examValidation" class="btn btn-success px-5 fs-5" (click)="getResult()"> النتيجة</button>
+        <span   *ngIf="showResult || examValidation" class="fs-5" > Final Result is : <strong class="text-success"> {{total}}/{{selectedSubject?.questions.length}}</strong></span>
+    </div>
+
+</div>

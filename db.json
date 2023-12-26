@@ -1,0 +1,77 @@
+{
+  "students": [
+    {
+      "username": "mahmoud",
+      "email": "m@m",
+      "password": "123",
+      "subjects": [
+        {
+          "name": "Math",
+          "id": "1",
+          "degree": 0
+        }
+      ],
+      "id": 1
+    },
+    {
+      "username": "nada",
+      "email": "nada@nada",
+      "password": "123",
+      "subjects": [
+        {
+          "name": "Math",
+          "id": "1",
+          "degree": 0
+        }
+      ],
+      "id": 2
+    },
+    {
+      "username": "tarek",
+      "email": "tarek@tarek",
+      "password": "123",
+      "id": 3
+    }
+  ],
+  "doctor": [
+    {
+      "username": "admin",
+      "email": "admin@admin",
+      "password": "123",
+      "id": 1
+    }
+  ],
+  "subjects": [
+    {
+      "name": "Math",
+      "questNums": "2",
+      "questions": [
+        {
+          "question": "1+2",
+          "answer1": "2",
+          "answer2": "3",
+          "answer3": "5",
+          "answer4": "4",
+          "correctAnswer": "3"
+        },
+        {
+          "question": "555-1",
+          "answer1": "ff",
+          "answer2": "ss",
+          "answer3": "444",
+          "answer4": "fs",
+          "correctAnswer": "ss"
+        }
+      ],
+      "id": 1
+    }
+  ],
+  "login": [
+    {
+      "username": "tarek",
+      "type": "student",
+      "userId": 3,
+      "id": 1
+    }
+  ]
+}

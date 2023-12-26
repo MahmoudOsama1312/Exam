@@ -1,0 +1,30 @@
+<div class="subjectBox">
+  <div class="row">
+    <div class="col-md-3 col-sm-12" *ngFor="let subject of subjects ; let index=index"
+      routerLink="/exam/{{subject.id}}">
+      <!-- Index for Buttons-->
+      <div class="namesubject">
+        <div *ngIf="!doneSubj.includes(subject.name)||info.type=='doctor'">{{subject.name}}</div>
+      </div>
+      <div class="subBtn">
+        <button *ngIf="info.type=='doctor'" mat-raised-button color="warn" class="mx-1" (click)="delete(index)">
+          حذف
+        </button>
+        <button *ngIf="info.type=='doctor'" mat-raised-button color="primary" class="mx-1">
+          عرض
+        </button>
+        <button *ngIf="info.type=='student' && !doneSubj.includes(subject.name)" mat-raised-button
+          class="mx-1 btn btn-success">
+          ابدأ الاختبار
+        </button>
+
+      </div>
+    </div>
+    <div *ngFor="let subject of subjects ; let index=index" class="end">
+      <div *ngIf="info.type === 'student' && doneSubj.includes(subject.name)" class="mx-1 done">
+        انتهي الاختبار ( {{subject.name}} )
+        <p> الدرجه هي : </p> <span>{{degrees[index]+"/"+subject.questNums}}</span>
+      </div>
+    </div>
+  </div>
+</div>
